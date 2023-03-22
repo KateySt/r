@@ -1,6 +1,7 @@
 package com.example.starlight.talent.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,20 +9,23 @@ import java.util.Set;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
-@Getter
 @Builder
 @ToString
+@Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class PositionEntity {
+public class Role {
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    Long positionId;
+    Long roleId;
 
-    String position;
-    @ManyToMany(mappedBy = "positions", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    ERole role;
+
+    @ManyToMany(mappedBy = "roles",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonBackReference
     Set<TalentEntity> talents;
 }

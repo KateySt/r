@@ -5,9 +5,9 @@ import lombok.Builder;
 import java.util.List;
 
 @Builder
-public record TalentsPagination(
-        int totalPage,
-        long totalTalents,
-        List<TalentShort> talents
+public record TalentShort(
+        String name,
+        String avatar,
+        List<String> positions
 ) {
 }
